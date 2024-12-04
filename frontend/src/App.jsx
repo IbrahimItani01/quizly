@@ -12,6 +12,20 @@ function App() {
     <>
       <UserProvider>
       </UserProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        limit={1}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="dark"
+      />
+    </>
   );
 }
 
