@@ -40,6 +40,16 @@ const Quiz = () => {
       updateScore();
     }
 
+    // Move to the next question or finish the quiz
+    if (currentQuestionIndex < quizQuestions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+      setUserAnswer(""); // Reset the input field
+    } else {
+      markQuizCompleted(parseInt(id));
+      alert("Quiz Complete!");
+      navigate("/complete"); // Optionally, navigate to a results or summary page
+    }
+  };
 
   return (
     <div className="quiz-container">
