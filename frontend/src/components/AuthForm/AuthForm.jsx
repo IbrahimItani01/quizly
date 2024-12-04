@@ -8,6 +8,7 @@ import { loginUser, registerUser } from "../../apis/users";
 import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ authType }) => {
+    const navigate = useNavigate();
 AuthForm.propTypes = {
   status: PropTypes.oneOf(["login", "register"]).isRequired,
 };
