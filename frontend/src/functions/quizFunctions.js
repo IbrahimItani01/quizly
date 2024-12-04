@@ -69,3 +69,9 @@ export const submitQuestion = (
     }, 3000);
   }
 };
+const updateScore = (setUser) => {
+  setUser((prevUser) => ({
+    ...prevUser,
+    score: prevUser.score + 10, // Add 10 points per correct answer
+  }));
+};
