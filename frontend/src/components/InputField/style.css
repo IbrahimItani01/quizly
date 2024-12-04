@@ -1,0 +1,15 @@
+.input-field{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.input-field>label{
+    color: var(--secondary-color);
+}
+.input-field>input{
+    height: 40px;
+    padding-inline: 5px;
+    width: 200px;
+    border-radius: 10px;
+    color: var(--secondary-color);
+}
