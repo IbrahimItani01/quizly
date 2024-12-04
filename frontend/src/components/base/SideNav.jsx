@@ -11,15 +11,14 @@ const SideNav = () => {
       </div>
       <div className="side-bar">
         {/* TODO: implement the logic to show the side titles if logged in */}
-        {quizzes?(
-          quizzes.map((quiz)=>(
-            <>
-            
-            </>
-          ))
-        ):(
-          <p>Create an account first 👀</p>
-
+        {quizzes ? (
+          localStorage.token ? (
+            quizzes.map((quiz) => <></>)
+          ) : (
+            <p>Create an account first 👀</p>
+          )
+        ) : (
+          <p>Oops no quizzes yet 👀</p>
         )}
       </div>
       <div className="footer">
