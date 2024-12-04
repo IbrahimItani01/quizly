@@ -30,7 +30,19 @@
   color: white;
   font-family: "roboto";
 }
+h1 {
+  font-size: 40px;
+  font-family: "montserrat";
+  font-weight: bolder;
 }
-input{
-    outline: none;
+h2 {
+  font-size: 24px;
+  font-family: "montserrat";
+  font-weight: bold;
+}
+em {
+  font-size: 12px;
+}
+input {
+  outline: none;
 }
