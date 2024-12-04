@@ -4,20 +4,29 @@ import { quizContext } from "../../context/QuizContext";
 const SideNav = () => {
   const { quizzes } = useContext(quizContext);
   return (
-    <div className='side-nav'>
-      <div className='side-logo'>
-        <img src={Logo} alt='logo' width={40}/>
+    <div className="side-nav">
+      <div className="side-logo">
+        <img src={Logo} alt="logo" width={40} />
         <h2>Quizly</h2>
       </div>
-      <div className='side-bar'>
+      <div className="side-bar">
         {/* TODO: implement the logic to show the side titles if logged in */}
-        <p>Create an account first 👀</p>
+        {quizzes?(
+          quizzes.map((quiz)=>(
+            <>
+            
+            </>
+          ))
+        ):(
+          <p>Create an account first 👀</p>
+
+        )}
       </div>
-      <div className='footer'>
+      <div className="footer">
         <em>Developed by Ibrahim Itani</em>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SideNav
+export default SideNav;
