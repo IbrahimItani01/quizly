@@ -89,6 +89,9 @@ const Quiz = () => {
         ...prevUser,
         completedQuizzes: [...(prevUser.completedQuizzes || []), parseInt(id)],
       }));
+      setTimeout(() => {
+        navigate("/panel");
+      }, 3000);
     }
   };
 
