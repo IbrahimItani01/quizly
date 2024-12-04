@@ -21,6 +21,10 @@ const AuthForm = ({ authType }) => {
       [name]: value,
     }));
   };
+  const handleNavigate = (e)=>{
+    e.target.textContent==="Login" && navigate("/login");
+    e.target.textContent==="Register" && navigate("/register");
+  }
   return (
     <div className="auth-form">
       <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
