@@ -30,3 +30,15 @@ const Quiz = () => {
             {({ remainingTime }) => <h3>{remainingTime}</h3>}
           </CountdownCircleTimer>
         </div>
+      ) : quizQuestions.length > 0 ? (
+        <div className="question-section">
+          {/* Progress Bar */}
+          <ProgressBar
+            completed={progress}
+            bgColor="#6A2C70"
+            height="20px"
+            labelAlignment="center"
+            labelColor="#fff"
+            baseBgColor="#ddd"
+          />
+
