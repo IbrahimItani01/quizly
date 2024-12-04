@@ -11,7 +11,7 @@ useEffect(()=>{
   console.log(completed);
 },[completed])
   return (
-    <div className={`quiz-btn ${completed ? "completed" : ""}`} onClick={handleNavigate}>
+    <div className={`quiz-btn ${completed ? "completed" : ""}`} onClick={completed?()=>{}:handleNavigate}>
       <div className="btn-title">
       {completed ? <CheckCircle color="#009402" /> : <FileText />}
       <p>{data.title}</p>
