@@ -72,3 +72,20 @@ const Quiz = () => {
               onChange={(e) => setUserAnswer(e.target.value)}
             />
           )}
+
+          {/* Submit Button */}
+          <button onClick={handleSubmitAnswer}>Submit Answer</button>
+
+          {/* Timer for each question */}
+          <div className="timer">
+            <CountdownCircleTimer
+              isPlaying
+              duration={15} // Duration for each question
+              colors={["#218380", "#F7B801", "#A30000"]}
+              colorsTime={[10, 5, 0]} // Change colors based on remaining time
+              onComplete={handleSubmitAnswer} // Automatically submit answer when time runs out
+            >
+              {({ remainingTime }) => <h4>Time Left: {remainingTime}s</h4>}
+            </CountdownCircleTimer>
+          </div>
+        </div>
