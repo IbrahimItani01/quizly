@@ -4,6 +4,7 @@ import { quizContext } from "../../context/QuizContext";
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import QuizButton from "../QuizButton/QuizButton";
 const SideNav = () => {
   const { quizzes } = useContext(quizContext);
   const token = localStorage.token;
@@ -20,10 +21,9 @@ const SideNav = () => {
         <h2>Quizly</h2>
       </div>
       <div className="side-bar">
-        {/* TODO: implement the logic to show the side titles if logged in */}
         {quizzes ? (
           token ? (
-            quizzes.map((quiz) => <></>)
+            quizzes.map((quiz) => <QuizButton data={quiz}/>)
           ) : (
             <p>Create an account first 👀</p>
           )
