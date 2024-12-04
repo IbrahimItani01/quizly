@@ -59,7 +59,7 @@ const Quiz = () => {
       toast.info("You shall answer 🧙‍♂️");
       return;
     }
-
+  
     // Check if the answer is correct
     if (
       (currentQuestion.type === "multiple-choice" &&
@@ -68,6 +68,7 @@ const Quiz = () => {
         userAnswer.trim().toLowerCase() ===
           currentQuestion.correctAnswer.trim().toLowerCase())
     ) {
+      toast.success("Bravo! 🥳 You nailed it! 🎯");
       updateScore();
     }
 
