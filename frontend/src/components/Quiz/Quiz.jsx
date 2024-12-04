@@ -4,6 +4,9 @@ import { userContext } from "../../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { Howl } from "howler"; // Import Howl for audio
+import "./style.css";
+import { toast } from "react-toastify";
 import CorrectAudio from "../../assets/audio/correct_answer.mp3";
 import WrongAudio from "../../assets/audio/wrong_answer.mp3";
 import FinishAudio from "../../assets/audio/succeeded_score.mp3";
