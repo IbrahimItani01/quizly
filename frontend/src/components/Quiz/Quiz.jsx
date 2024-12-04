@@ -47,6 +47,8 @@ const Quiz = () => {
 
   // Handle submission of an answer
   const handleSubmitAnswer = () => {
+    if (quizCompleted) return; // Prevent further actions if quiz is completed
+  
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
     // Check if the answer is correct
