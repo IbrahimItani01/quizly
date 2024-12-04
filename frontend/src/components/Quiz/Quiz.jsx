@@ -83,8 +83,8 @@ const Quiz = () => {
     } else {
       setQuizCompleted(true); // Mark the quiz as completed
       markQuizCompleted(parseInt(id));
-      alert("Quiz Complete!");
-      navigate("/complete"); // Optionally, navigate to a results or summary page
+      toast.success("Quiz Complete 🥳");
+      sounds.completed.play(); // Play quiz completion sound
     }
   };
 
