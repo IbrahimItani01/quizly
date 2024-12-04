@@ -14,6 +14,13 @@ const AuthForm = ({ authType }) => {
     email: "",
     password: "",
   });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setAuthForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <div className="auth-form">
       <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
