@@ -82,6 +82,12 @@ const Quiz = () => {
             className="progress-bar"
             barContainerClassName="progress-container"
           />
+          <Question
+            quizQuestions={quizQuestions}
+            currentQuestionIndex={currentQuestionIndex}
+            setUserAnswer={setUserAnswer}
+            userAnswer={userAnswer}
+          />
           <Button
             onClick={handleSubmitAnswer}
             design={"outline"}
