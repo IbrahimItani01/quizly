@@ -71,6 +71,9 @@ const Quiz = () => {
       toast.success("Bravo! 🥳 You nailed it! 🎯");
       sounds.correct.play();
       updateScore();
+    } else {
+      toast.error("Ooops Wrong Answer 😔");
+      sounds.wrong.play(); // Play wrong answer sound
     }
 
     // Move to the next question or finish the quiz
