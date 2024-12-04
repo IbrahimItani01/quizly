@@ -50,6 +50,15 @@ const Quiz = () => {
     if (quizCompleted) return; // Prevent further actions if quiz is completed
   
     const currentQuestion = quizQuestions[currentQuestionIndex];
+  
+    // Check if an answer is provided
+    if (
+      (currentQuestion.type === "multiple-choice" && !userAnswer) || // No option selected for multiple-choice
+      (currentQuestion.type === "user-input" && userAnswer.trim() === "") // Input field is empty
+    ) {
+      toast.info("You shall answer 🧙‍♂️");
+      return;
+    }
 
     // Check if the answer is correct
     if (
