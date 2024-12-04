@@ -89,3 +89,11 @@ const Quiz = () => {
             </CountdownCircleTimer>
           </div>
         </div>
+      ) : (
+        <p>Loading quiz...</p>
+      )}
+    </div>
+  );
+};
+
+export default Quiz;
