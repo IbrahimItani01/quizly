@@ -1,0 +1,24 @@
+.question-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.question-container *{
+    color: var(--secondary-color);
+}
+.question-container ul{
+    list-style: none;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.question-container label{
+    display: flex;
+    gap: 5px;
+}
+.question-container input{
+    padding: 10px;
+    border-radius: 10px;
+}
