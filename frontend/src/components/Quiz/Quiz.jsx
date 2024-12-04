@@ -77,6 +77,11 @@ const Quiz = () => {
             bgColor="#6A2C70"
             height="20px"
             labelAlignment="center"
+            labelColor="#14281d"
+            baseBgColor="#ffff"
+            className="progress-bar"
+            barContainerClassName="progress-container"
+          />
           <Button
             onClick={handleSubmitAnswer}
             design={"outline"}
