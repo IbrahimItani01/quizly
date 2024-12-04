@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { quizContext } from "../../context/QuizContext";
 import { userContext } from "../../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import ProgressBar from "@ramonak/react-progress-bar";
+import CountDown from "../CountDown/CountDown";
+import Question from "../Question/Question";
+import Timer from "../Timer/Timer";
+import Button from "../Button/Button";
 import { Howl } from "howler"; // Import Howl for audio
 import "./style.css";
 import { toast } from "react-toastify";
