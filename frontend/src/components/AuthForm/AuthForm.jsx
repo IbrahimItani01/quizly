@@ -21,6 +21,25 @@ const AuthForm = ({ authType }) => {
       [name]: value,
     }));
   };
+  const handleSubmit =  () => {
+    if (authType === "login") {
+      if (authForm.email && authForm.password) {
+        if (loginUser(authForm)) {
+          toast.success("Logged in 🎊");
+          localStorage.setItem("authenticated", "true");
+          setAuthForm({
+            name: "",
+            email: "",
+            password: "",
+          });
+        } else {
+          toast.error("Something went wrong ⛔");
+        }
+      } else {
+        toast.error("You missed an input 🤭");
+      }
+    } else {
+  };
   const handleNavigate = (e)=>{
     e.target.textContent==="Login" && navigate("/login");
     e.target.textContent==="Register" && navigate("/register");
