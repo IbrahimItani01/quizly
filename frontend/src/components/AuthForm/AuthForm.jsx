@@ -3,12 +3,11 @@ import "./style.css";
 import PropTypes from "prop-types";
 import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
-import { toast } from "react-toastify";
-import { loginUser, registerUser } from "../../apis/users";
 import { useNavigate } from "react-router-dom";
+import { authUser } from "../../functions/authUser";
 
 const AuthForm = ({ authType }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [authForm, setAuthForm] = useState({
     name: "",
     email: "",
@@ -21,45 +20,18 @@ const AuthForm = ({ authType }) => {
       [name]: value,
     }));
   };
-  const handleSubmit =  () => {
-    if (authType === "login") {
-      if (authForm.email && authForm.password) {
-        if (loginUser(authForm)) {
-          toast.success("Logged in 🎊");
-          localStorage.setItem("authenticated", "true");
-          setAuthForm({
-            name: "",
-            email: "",
-            password: "",
-          });
-        } else {
-          toast.error("Something went wrong ⛔");
-        }
-      } else {
-        toast.error("You missed an input 🤭");
-      }
-    } else {
-      if (authForm.name && authForm.email && authForm.password) {
-        if (registerUser(authForm)) {
-          toast.success("Logged in 🎊");
-          localStorage.setItem("authenticated", "true");
-          setAuthForm({
-            name: "",
-            email: "",
-            password: "",
-          });
-        } else {
-          toast.error("Something went wrong ⛔");
-        }
-      } else {
-        toast.error("You missed an input 🤭");
-      }
-    }
+  const handleSubmit = () => {
+    authUser(authType, authForm) &&
+      setAuthForm({
+        name: "",
+        email: "",
+        password: "",
+      });
   };
-  const handleNavigate = (e)=>{
-    e.target.textContent==="Login" && navigate("/login");
-    e.target.textContent==="Register" && navigate("/register");
-  }
+  const handleNavigate = (e) => {
+    e.target.textContent === "Login" && navigate("/login");
+    e.target.textContent === "Register" && navigate("/register");
+  };
   return (
     <div className="auth-form">
       <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
@@ -117,14 +89,15 @@ const AuthForm = ({ authType }) => {
         design={"action"}
         onClick={handleSubmit}
       />
-      {
-        authType==="login"? (
-            <em>Don't have an account? <span onClick={handleNavigate}>Register</span></em>
-        ):(
-            <em>Have an account? <span onClick={handleNavigate}>Login</span></em>
-
-        )
-      }
+      {authType === "login" ? (
+        <em>
+          Don't have an account? <span onClick={handleNavigate}>Register</span>
+        </em>
+      ) : (
+        <em>
+          Have an account? <span onClick={handleNavigate}>Login</span>
+        </em>
+      )}
     </div>
   );
 };
