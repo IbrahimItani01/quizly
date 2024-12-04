@@ -17,6 +17,28 @@ const AuthForm = ({ authType }) => {
   return (
     <div className="auth-form">
       <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
+      <div>
+        {authType === "login" ? (
+          <>
+            <InputField
+              name={"email"}
+              label={"Email"}
+              type={"email"}
+              placeholder={"enter your email"}
+              value={authForm.email}
+              onChange={handleChange}
+            />
+            <InputField
+              name={"password"}
+              label={"Password"}
+              type={"password"}
+              placeholder={"enter your password"}
+              value={authForm.password}
+              onChange={handleChange}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };
