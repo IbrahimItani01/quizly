@@ -14,6 +14,12 @@ const AuthForm = ({ authType }) => {
     email: "",
     password: "",
   });
+  return (
+    <div className="auth-form">
+      <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
+    </div>
+  );
+};
 AuthForm.propTypes = {
   status: PropTypes.oneOf(["login", "register"]).isRequired,
 };
