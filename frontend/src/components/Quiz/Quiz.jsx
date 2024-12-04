@@ -69,6 +69,7 @@ const Quiz = () => {
           currentQuestion.correctAnswer.trim().toLowerCase())
     ) {
       toast.success("Bravo! 🥳 You nailed it! 🎯");
+      sounds.correct.play();
       updateScore();
     }
 
