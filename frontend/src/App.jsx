@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QuizProvider } from "./context/QuizContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Panel from "./components/Panel/Panel";
 function App() {
   const navigate = useNavigate();
 
@@ -38,13 +39,11 @@ function App() {
                 path="/register"
                 element={<AuthForm authType={"register"} />}
               />
-              {/* Protected Route */}
               <Route
                 path="/panel"
                 element={
                   <ProtectedRoute>
-                    {/* TODO: Panel Component or Dashboard */}
-                    <div>Welcome to the Panel!</div>
+                    <Panel/>
                   </ProtectedRoute>
                 }
               />
