@@ -6,7 +6,7 @@ export const userContext = createContext();
 const UserProvider = ({children})=>{
     const [user,setUser] = useState(mockUsers[0]);
     return(
-        <userContext.Provider value={user}>
+        <userContext.Provider value={{user,setUser}}>
             {children}
         </userContext.Provider>
     )
