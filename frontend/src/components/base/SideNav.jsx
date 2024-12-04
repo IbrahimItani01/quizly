@@ -5,15 +5,18 @@ import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import QuizButton from "../QuizButton/QuizButton";
+
 const SideNav = () => {
-  const { quizzes } = useContext(quizContext);
+  const { quizzes, completedQuizzes } = useContext(quizContext);
   const token = localStorage.token;
   const navigate = useNavigate();
-  const handleLogout = ()=>{
+
+  const handleLogout = () => {
     localStorage.clear();
-    navigate("/")
-    toast.info("See Ya 👋")
-  }
+    navigate("/");
+    toast.info("See Ya 👋");
+  };
+
   return (
     <div className="side-nav">
       <div className="side-logo">
@@ -23,7 +26,13 @@ const SideNav = () => {
       <div className="side-bar">
         {quizzes ? (
           token ? (
-            quizzes.map((quiz) => <QuizButton data={quiz}/>)
+            quizzes.map((quiz) => (
+              <QuizButton
+                key={quiz.id}
+                data={quiz}
+                completed={completedQuizzes.includes(quiz.id)}
+              />
+            ))
           ) : (
             <p>Create an account first 👀</p>
           )
@@ -32,9 +41,9 @@ const SideNav = () => {
         )}
       </div>
       <div className="footer">
-        {token?(
-          <LogOut className="logout-icon" onClick={handleLogout}/>
-        ):(
+        {token ? (
+          <LogOut className="logout-icon" onClick={handleLogout} />
+        ) : (
           <em>Developed by Ibrahim Itani</em>
         )}
       </div>
