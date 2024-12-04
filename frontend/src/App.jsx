@@ -15,6 +15,13 @@ function App() {
           <SideNav />
           <div className="content-panel">
             <StatBar />
+            <Routes>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/login" element={<AuthForm authType={"login"} />} />
+              <Route
+                path="/register"
+                element={<AuthForm authType={"register"} />}
+              />
             </Routes>
           </div>
         </div>
