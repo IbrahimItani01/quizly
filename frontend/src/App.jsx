@@ -43,7 +43,20 @@ function App() {
                 path="/panel"
                 element={
                   <ProtectedRoute>
-                    <Panel/>
+                    <Panel />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/quiz/:id"
+                element={
+                  <ProtectedRoute>
+                    <QuizProvider>
+                      <Quiz />
+                    </QuizProvider>
+                  </ProtectedRoute>
+                }
+              />
                   </ProtectedRoute>
                 }
               />
