@@ -71,6 +71,14 @@ const AuthForm = ({ authType }) => {
         design={"action"}
         onClick={handleSubmit}
       />
+      {
+        authType==="login"? (
+            <em>Don't have an account? <span onClick={handleNavigate}>Register</span></em>
+        ):(
+            <em>Have an account? <span onClick={handleNavigate}>Login</span></em>
+
+        )
+      }
     </div>
   );
 };
