@@ -1,6 +1,8 @@
-import React from 'react'
-import Logo from "../../logo.svg"
+import React, { useContext } from "react";
+import Logo from "../../logo.svg";
+import { quizContext } from "../../context/QuizContext";
 const SideNav = () => {
+  const { quizzes } = useContext(quizContext);
   return (
     <div className='side-nav'>
       <div className='side-logo'>
