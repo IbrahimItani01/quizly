@@ -9,6 +9,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QuizProvider } from "./context/QuizContext";
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.token;
+    if (token) {
+      navigate("/panel");
+    } else {
+      navigate("/");
+    }
+  }, [navigate]);
+
   return (
     <>
       <UserProvider>
