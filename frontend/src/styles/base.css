@@ -75,6 +75,30 @@ input {
 .footer {
   align-self: center;
 }
+.stat-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  align-items: center;
+  border-bottom: 2px solid var(--secondary-color);
+}
+.stat-bar h1{
+    color: var(--secondary-color);
+}
+.stat-bar p{
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+.stats-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: white;
+  border-radius: 10px;
+  width: 120px;
+  justify-content: center;
+  padding: 5px;
+}
 
 .side-bar{
     display: flex;
