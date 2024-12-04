@@ -7,12 +7,15 @@ import AuthForm from "./components/AuthForm/AuthForm";
 import UserProvider from "./context/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QuizProvider } from "./context/QuizContext";
 function App() {
   return (
     <>
       <UserProvider>
         <div className="main-panel">
-          <SideNav />
+          <QuizProvider>
+            <SideNav />
+          </QuizProvider>
           <div className="content-panel">
             <StatBar />
             <Routes>
