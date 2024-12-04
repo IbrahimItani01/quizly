@@ -25,6 +25,8 @@ const Quiz = () => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false); // New state
 
+  const navigate = useNavigate();
+
 
   // Fetch quiz questions when quiz id changes
   useEffect(() => {
