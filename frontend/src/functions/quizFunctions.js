@@ -1,3 +1,14 @@
+import { toast } from "react-toastify";
+import { Howl } from "howler"; // Import Howl for audio
+import CorrectAudio from "../assets/audio/correct_answer.mp3";
+import WrongAudio from "../assets/audio/wrong_answer.mp3";
+import FinishAudio from "../assets/audio/succeeded_score.mp3";
+// Define sound effects
+const sounds = {
+  correct: new Howl({ src: [CorrectAudio], volume: 0.8 }),
+  wrong: new Howl({ src: [WrongAudio], volume: 0.8 }),
+  completed: new Howl({ src: [FinishAudio], volume: 0.8 }),
+};
 export const submitQuestion = (
   quizCompleted,
   quizQuestions,
