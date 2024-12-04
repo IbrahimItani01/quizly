@@ -9,3 +9,10 @@ const Quiz = () => {
   const { questions, markQuizCompleted } = useContext(quizContext);
   const { user, setUser } = useContext(userContext);
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [quizQuestions, setQuizQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [showCountdown, setShowCountdown] = useState(true);
+  const [quizStarted, setQuizStarted] = useState(false);
