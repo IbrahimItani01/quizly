@@ -14,8 +14,11 @@
     flex-direction: column;
     gap: 10px;
 }
+.auth-form em{
+    color: var(--secondary-color);
+}
 .auth-form span{
     text-decoration: underline;
-    color: var(--secondary-color);
+    color: var(--primary-color);
     cursor: pointer;
 }
