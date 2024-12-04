@@ -22,11 +22,14 @@
   src: url("../assets/fonts/montserrat-roboto/Roboto/Roboto-Bold.ttf");
   font-weight: bold;
 }
-*{
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-sizing: border-box;
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  color: white;
+  font-family: "roboto";
+}
 }
 input{
     outline: none;
