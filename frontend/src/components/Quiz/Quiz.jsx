@@ -27,6 +27,12 @@ const Quiz = () => {
 
   const navigate = useNavigate();
 
+  // Define sound effects
+  const sounds = {
+    correct: new Howl({ src: [CorrectAudio], volume: 0.8 }),
+    wrong: new Howl({ src: [WrongAudio], volume: 0.8 }),
+    completed: new Howl({ src: [FinishAudio], volume: 0.8 }),
+  };
 
   // Fetch quiz questions when quiz id changes
   useEffect(() => {
