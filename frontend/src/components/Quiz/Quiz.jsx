@@ -51,6 +51,15 @@ const Quiz = () => {
     }
   };
 
+  // Update user score in context
+  const updateScore = () => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      score: prevUser.score + 10, // Add 10 points per correct answer
+    }));
+  };
+
+
   return (
     <div className="quiz-container">
       {showCountdown ? (
