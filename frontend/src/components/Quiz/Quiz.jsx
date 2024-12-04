@@ -42,3 +42,25 @@ const Quiz = () => {
             baseBgColor="#ddd"
           />
 
+          <h2>Question {currentQuestionIndex + 1}</h2>
+          <p>{quizQuestions[currentQuestionIndex].question}</p>
+
+          {quizQuestions[currentQuestionIndex].type === "multiple-choice" ? (
+            <ul>
+              {quizQuestions[currentQuestionIndex].options.map(
+                (option, index) => (
+                  <li key={index}>
+                    <label>
+                      <input
+                        type="radio"
+                        name={`question-${quizQuestions[currentQuestionIndex].id}`}
+                        value={option}
+                        onChange={(e) => setUserAnswer(e.target.value)}
+                      />
+                      {option}
+                    </label>
+                  </li>
+                )
+              )}
+            </ul>
+          ) : (
