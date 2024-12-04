@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 import Logo from "../../logo.svg";
 import { quizContext } from "../../context/QuizContext";
+import { userContext } from "../../context/UserContext"; // Import userContext
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import QuizButton from "../QuizButton/QuizButton";
 
 const SideNav = () => {
-  const { quizzes, completedQuizzes } = useContext(quizContext);
+  const { quizzes } = useContext(quizContext); // Fetch quizzes from quizContext
+  const { user } = useContext(userContext); // Fetch user from userContext
   const token = localStorage.token;
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ const SideNav = () => {
               <QuizButton
                 key={quiz.id}
                 data={quiz}
-                completed={completedQuizzes.includes(quiz.id)}
+                completed={user?.completedQuizzes?.includes(quiz.id)} // Check completion via userContext
               />
             ))
           ) : (
