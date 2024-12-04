@@ -64,3 +64,11 @@ const Quiz = () => {
               )}
             </ul>
           ) : (
+            <input
+              type="text"
+              placeholder="Type your answer here"
+              name={`question-${quizQuestions[currentQuestionIndex].id}`}
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+            />
+          )}
