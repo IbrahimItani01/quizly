@@ -4,7 +4,9 @@ import { userContext } from "../../context/UserContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import ProgressBar from "@ramonak/react-progress-bar";
-// TODO: revamp
+import CorrectAudio from "../../assets/audio/correct_answer.mp3";
+import WrongAudio from "../../assets/audio/wrong_answer.mp3";
+import FinishAudio from "../../assets/audio/succeeded_score.mp3";
 const Quiz = () => {
   const { questions, markQuizCompleted } = useContext(quizContext);
   const { user, setUser } = useContext(userContext);
