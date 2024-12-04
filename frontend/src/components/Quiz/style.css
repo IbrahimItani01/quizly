@@ -1,0 +1,27 @@
+.quiz-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+}
+.question-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+    width:100%;
+    gap: 15px;
+}
+.progress-bar{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+}
+.progress-container{
+    background-color: white;
+    border-radius: 10px;
+}
