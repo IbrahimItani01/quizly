@@ -73,7 +73,18 @@ input {
   gap: 5px;
 }
 .footer {
-  align-self: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  position: relative; 
+}
+.logout-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: rotateZ(180deg);
+  cursor: pointer;
 }
 .stat-bar {
   display: flex;
