@@ -14,10 +14,9 @@ import CorrectAudio from "../../assets/audio/correct_answer.mp3";
 import WrongAudio from "../../assets/audio/wrong_answer.mp3";
 import FinishAudio from "../../assets/audio/succeeded_score.mp3";
 const Quiz = () => {
+  const { id } = useParams();
   const { questions, markQuizCompleted } = useContext(quizContext);
   const { user, setUser } = useContext(userContext);
-  const { id } = useParams();
-  const navigate = useNavigate();
 
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
