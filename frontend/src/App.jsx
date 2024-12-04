@@ -11,18 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { QuizProvider } from "./context/QuizContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Panel from "./components/Panel/Panel";
+import Quiz from "./components/Quiz/Quiz";
 function App() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = localStorage.token;
-    if (token) {
-      navigate("/panel");
-    } else {
-      navigate("/");
-    }
-  }, [navigate]);
-
   return (
     <>
       <UserProvider>
@@ -57,6 +47,14 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+               <Route
+                path="/complete"
+                element={
+                  <ProtectedRoute>
+                    <QuizProvider>
+                      {/* TODO: implement a congrats component */}
+                      <div>congrats</div>
+                    </QuizProvider>
                   </ProtectedRoute>
                 }
               />
