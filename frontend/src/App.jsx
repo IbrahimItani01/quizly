@@ -11,6 +11,13 @@ function App() {
   return (
     <>
       <UserProvider>
+        <div className="main-panel">
+          <SideNav />
+          <div className="content-panel">
+            <StatBar />
+            </Routes>
+          </div>
+        </div>
       </UserProvider>
       <ToastContainer
         position="top-right"
