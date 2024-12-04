@@ -85,6 +85,10 @@ const Quiz = () => {
       markQuizCompleted(parseInt(id));
       toast.success("Quiz Complete 🥳");
       sounds.completed.play(); // Play quiz completion sound
+      setUser((prevUser) => ({
+        ...prevUser,
+        completedQuizzes: [...(prevUser.completedQuizzes || []), parseInt(id)],
+      }));
     }
   };
 
