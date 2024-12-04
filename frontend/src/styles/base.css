@@ -53,3 +53,8 @@ input {
   width: 100%;
   background-color: var(--bg);
 }
+.content-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
