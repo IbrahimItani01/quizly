@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SideNav from "./components/base/SideNav";
 import StatBar from "./components/base/StatBar";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import "./styles/base.css";
 import Welcome from "./components/Welcome/Welcome";
 import AuthForm from "./components/AuthForm/AuthForm";
@@ -47,24 +47,13 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-               <Route
-                path="/complete"
-                element={
-                  <ProtectedRoute>
-                    <QuizProvider>
-                      {/* TODO: implement a congrats component */}
-                      <div>congrats</div>
-                    </QuizProvider>
-                  </ProtectedRoute>
-                }
-              />
             </Routes>
           </div>
         </div>
       </UserProvider>
       <ToastContainer
         position="top-right"
-        autoClose={2000}
+        autoClose={1000}
         limit={1}
         hideProgressBar={false}
         newestOnTop={false}
