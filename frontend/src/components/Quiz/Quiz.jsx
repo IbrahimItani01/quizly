@@ -48,9 +48,9 @@ const Quiz = () => {
   // Handle submission of an answer
   const handleSubmitAnswer = () => {
     if (quizCompleted) return; // Prevent further actions if quiz is completed
-  
+
     const currentQuestion = quizQuestions[currentQuestionIndex];
-  
+
     // Check if an answer is provided
     if (
       (currentQuestion.type === "multiple-choice" && !userAnswer) || // No option selected for multiple-choice
@@ -59,7 +59,7 @@ const Quiz = () => {
       toast.info("You shall answer 🧙‍♂️");
       return;
     }
-  
+
     // Check if the answer is correct
     if (
       (currentQuestion.type === "multiple-choice" &&
@@ -115,10 +115,9 @@ const Quiz = () => {
         <CountDown handleCountdownComplete={handleCountdownComplete} />
       ) : quizQuestions.length > 0 ? (
         <div className="question-section">
-          {/* Progress Bar */}
           <ProgressBar
             completed={progress}
-            bgColor="#6A2C70"
+            bgColor="#009402"
             height="20px"
             labelAlignment="center"
             labelColor="#14281d"
