@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { quizContext } from "../../context/QuizContext";
-import { userContext } from "../../context/UserContext";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import ProgressBar from "@ramonak/react-progress-bar";
 import CountDown from "../CountDown/CountDown";
@@ -8,58 +7,48 @@ import Question from "../Question/Question";
 import Timer from "../Timer/Timer";
 import Button from "../Button/Button";
 import "./style.css";
+import { updateScore, markQuizCompleted } from "../../redux/slices/userSlice";
 import { submitQuestion } from "../../functions/quizFunctions";
 
 const Quiz = () => {
-  const { id } = useParams();
-  const { questions, markQuizCompleted } = useContext(quizContext);
-  const { setUser } = useContext(userContext);
+  const { id } = useParams();   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [quizQuestions, setQuizQuestions] = useState([]);
+    const questions = useSelector((state) => state.quiz.questions[id] || []);
+  const user = useSelector((state) => state.user);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [showCountdown, setShowCountdown] = useState(true);
-  const [quizCompleted, setQuizCompleted] = useState(false); // New state
-
-  const navigate = useNavigate();
-
-  // Fetch quiz questions when quiz id changes
-  useEffect(() => {
-    setQuizQuestions(questions[parseInt(id)]);
-  }, [questions, id]);
-
-  // Countdown logic before showing the quiz
-  const handleCountdownComplete = () => {
+  const [quizCompleted, setQuizCompleted] = useState(false); 
+    const handleCountdownComplete = () => {
     setShowCountdown(false);
   };
 
-  const handleSubmitAnswer = () => {
+    const handleSubmitAnswer = () => {
     submitQuestion(
       quizCompleted,
-      quizQuestions,
+      questions,
       currentQuestionIndex,
       userAnswer,
       setCurrentQuestionIndex,
       setUserAnswer,
-      setUser,
-      setQuizCompleted,
-      markQuizCompleted,
-      navigate,
+      dispatch,       navigate,
       id
     );
   };
+  
 
-  // Calculate progress
-  const progress =
-    currentQuestionIndex >= quizQuestions.length - 1
+    const progress =
+    currentQuestionIndex >= questions.length - 1
       ? 100
-      : Math.round((currentQuestionIndex / quizQuestions.length) * 100);
+      : Math.round((currentQuestionIndex / questions.length) * 100);
 
   return (
     <div className="quiz-container">
       {showCountdown ? (
         <CountDown handleCountdownComplete={handleCountdownComplete} />
-      ) : quizQuestions.length > 0 ? (
+      ) : questions.length > 0 ? (
         <div className="question-section">
           <ProgressBar
             completed={progress}
@@ -72,7 +61,7 @@ const Quiz = () => {
             barContainerClassName="progress-container"
           />
           <Question
-            quizQuestions={quizQuestions}
+            quizQuestions={questions}
             currentQuestionIndex={currentQuestionIndex}
             setUserAnswer={setUserAnswer}
             userAnswer={userAnswer}

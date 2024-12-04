@@ -1,17 +1,26 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import Logo from "../../logo.svg";
-import { quizContext } from "../../context/QuizContext";
-import { userContext } from "../../context/UserContext"; // Import userContext
 import { LogOut } from "lucide-react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import QuizButton from "../QuizButton/QuizButton";
+import { useSelector, useDispatch } from "react-redux";
+import { setQuizzes, setQuestions } from "../../redux/slices/quizSlice"; import { mockQuestions, mockQuizzes } from "../../mock/quizzes";
 
 const SideNav = () => {
-  const { quizzes } = useContext(quizContext); // Fetch quizzes from quizContext
-  const { user } = useContext(userContext); // Fetch user from userContext
-  const token = localStorage.token;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+    const quizzes = useSelector((state) => state.quiz.quizzes);
+  const user = useSelector((state) => state.user);
+
+  const token = localStorage.token;
+
+    useEffect(() => {
+    dispatch(setQuizzes(mockQuizzes));     for (const quizId in mockQuestions) {
+      dispatch(setQuestions({ quizId, questions: mockQuestions[quizId] }));     }
+  }, []);
+  
 
   const handleLogout = () => {
     localStorage.clear();
@@ -26,14 +35,13 @@ const SideNav = () => {
         <h2>Quizly</h2>
       </div>
       <div className="side-bar">
-        {quizzes ? (
+        {quizzes.length ? (
           token ? (
             quizzes.map((quiz) => (
               <QuizButton
                 key={quiz.id}
                 data={quiz}
-                completed={user?.completedQuizzes?.includes(quiz.id)} // Check completion via userContext
-              />
+                completed={user?.completedQuizzes?.includes(quiz.id)}               />
             ))
           ) : (
             <p>Create an account first 👀</p>

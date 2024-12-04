@@ -1,25 +1,24 @@
 import React from "react";
 import SideNav from "./components/base/SideNav";
 import StatBar from "./components/base/StatBar";
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./styles/base.css";
 import Welcome from "./components/Welcome/Welcome";
 import AuthForm from "./components/AuthForm/AuthForm";
-import UserProvider from "./context/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { QuizProvider } from "./context/QuizContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Panel from "./components/Panel/Panel";
 import Quiz from "./components/Quiz/Quiz";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
 function App() {
   return (
     <>
-      <UserProvider>
+      <Provider store={store}>
         <div className="main-panel">
-          <QuizProvider>
-            <SideNav />
-          </QuizProvider>
+          <SideNav />
           <div className="content-panel">
             <StatBar />
             <Routes>
@@ -41,16 +40,14 @@ function App() {
                 path="/quiz/:id"
                 element={
                   <ProtectedRoute>
-                    <QuizProvider>
-                      <Quiz />
-                    </QuizProvider>
+                    <Quiz />
                   </ProtectedRoute>
                 }
               />
             </Routes>
           </div>
         </div>
-      </UserProvider>
+      </Provider>
       <ToastContainer
         position="top-right"
         autoClose={1000}

@@ -1,17 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Star } from "lucide-react";
-import { userContext } from "../../context/UserContext";
+import { useSelector } from "react-redux";
 
 const StatBar = () => {
-  const { user } = useContext(userContext); // Access the user object from context
+  const user = useSelector((state) => state.user);
   const token = localStorage.token;
 
+  console.log("User Data:", user); 
   return (
     <div className="stat-bar">
       <h1>✏️ Welcome, {user && token ? user.name : "Human"}!</h1>
-      {user && user.score && token ? (
+      {user && token ? (
         <div className="stats-section">
-          <p>Score: {user.score}</p>
+          <p>Score: {typeof user.score === "number" ? user.score : 0}</p>
           <Star fill="#009402" color="" />
         </div>
       ) : (

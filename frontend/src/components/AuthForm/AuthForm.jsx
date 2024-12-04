@@ -5,9 +5,13 @@ import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { authUser } from "../../functions/authUser";
+import { useDispatch } from "react-redux";
+import { mockUsers } from "../../mock/users";
+import { setUser } from "../../redux/slices/userSlice";
 
 const AuthForm = ({ authType }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [authForm, setAuthForm] = useState({
     name: "",
     email: "",
@@ -22,6 +26,8 @@ const AuthForm = ({ authType }) => {
   };
   const handleSubmit = () => {
     if(authUser(authType, authForm)){
+      const defaultUser = mockUsers[0];
+      dispatch(setUser(defaultUser))
       setAuthForm({
         name: "",
         email: "",

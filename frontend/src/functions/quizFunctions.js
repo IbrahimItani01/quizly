@@ -1,14 +1,15 @@
 import { toast } from "react-toastify";
-import { Howl } from "howler"; // Import Howl for audio
-import CorrectAudio from "../assets/audio/correct_answer.mp3";
+import { Howl } from "howler"; import { updateScore, markQuizCompleted } from "../redux/slices/userSlice"; import CorrectAudio from "../assets/audio/correct_answer.mp3";
 import WrongAudio from "../assets/audio/wrong_answer.mp3";
 import FinishAudio from "../assets/audio/succeeded_score.mp3";
-// Define sound effects
+
+
 const sounds = {
   correct: new Howl({ src: [CorrectAudio], volume: 0.8 }),
   wrong: new Howl({ src: [WrongAudio], volume: 0.8 }),
   completed: new Howl({ src: [FinishAudio], volume: 0.8 }),
 };
+
 export const submitQuestion = (
   quizCompleted,
   quizQuestions,
@@ -16,27 +17,19 @@ export const submitQuestion = (
   userAnswer,
   setCurrentQuestionIndex,
   setUserAnswer,
-  setUser,
-  setQuizCompleted,
-  markQuizCompleted,
-  navigate,
+  dispatch,   navigate,
   id
 ) => {
-  if (quizCompleted) return; // Prevent further actions if quiz is completed
-
+  if (quizCompleted) return; 
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
-  // Check if an answer is provided
-  if (
-    (currentQuestion.type === "multiple-choice" && !userAnswer) || // No option selected for multiple-choice
-    (currentQuestion.type === "user-input" && userAnswer.trim() === "") // Input field is empty
-  ) {
+    if (
+    (currentQuestion.type === "multiple-choice" && !userAnswer) ||     (currentQuestion.type === "user-input" && userAnswer.trim() === "")   ) {
     toast.info("You shall answer 🧙‍♂️");
     return;
   }
 
-  // Check if the answer is correct
-  if (
+    if (
     (currentQuestion.type === "multiple-choice" &&
       userAnswer === currentQuestion.correctAnswer) ||
     (currentQuestion.type === "user-input" &&
@@ -45,33 +38,16 @@ export const submitQuestion = (
   ) {
     toast.success("Bravo! 🥳 You nailed it! 🎯");
     sounds.correct.play();
-    updateScore(setUser);
-  } else {
+    dispatch(updateScore(10));   } else {
     toast.error("Ooops Wrong Answer 😔");
-    sounds.wrong.play(); // Play wrong answer sound
-  }
+    sounds.wrong.play();   }
 
-  // Move to the next question or finish the quiz
-  if (currentQuestionIndex < quizQuestions.length - 1) {
+    if (currentQuestionIndex < quizQuestions.length - 1) {
     setCurrentQuestionIndex((prev) => prev + 1);
-    setUserAnswer(""); // Reset the input field
-  } else {
-    setQuizCompleted(true); // Mark the quiz as completed
-    markQuizCompleted(parseInt(id));
+    setUserAnswer("");   } else {
     toast.success("Quiz Complete 🥳");
-    sounds.completed.play(); // Play quiz completion sound
-    setUser((prevUser) => ({
-      ...prevUser,
-      completedQuizzes: [...(prevUser.completedQuizzes || []), parseInt(id)],
-    }));
-    setTimeout(() => {
+    sounds.completed.play();     dispatch(markQuizCompleted(parseInt(id)));     setTimeout(() => {
       navigate("/panel");
     }, 3000);
   }
-};
-const updateScore = (setUser) => {
-  setUser((prevUser) => ({
-    ...prevUser,
-    score: prevUser.score + 10, // Add 10 points per correct answer
-  }));
 };
