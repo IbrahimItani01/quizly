@@ -68,17 +68,7 @@ const Quiz = () => {
   return (
     <div className="quiz-container">
       {showCountdown ? (
-        <div className="countdown">
-          <h2>Get ready for the quiz!</h2>
-          <CountdownCircleTimer
-            isPlaying
-            duration={3}
-            colors="#6A2C70"
-            onComplete={handleCountdownComplete}
-          >
-            {({ remainingTime }) => <h3>{remainingTime}</h3>}
-          </CountdownCircleTimer>
-        </div>
+        <CountDown handleCountdownComplete={handleCountdownComplete} />
       ) : quizQuestions.length > 0 ? (
         <div className="question-section">
           {/* Progress Bar */}
