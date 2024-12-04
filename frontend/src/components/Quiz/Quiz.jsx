@@ -23,6 +23,8 @@ const Quiz = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [showCountdown, setShowCountdown] = useState(true);
   const [quizStarted, setQuizStarted] = useState(false);
+  const [quizCompleted, setQuizCompleted] = useState(false); // New state
+
 
   // Fetch quiz questions when quiz id changes
   useEffect(() => {
