@@ -3,6 +3,7 @@ import Logo from "../../logo.svg";
 import { quizContext } from "../../context/QuizContext";
 const SideNav = () => {
   const { quizzes } = useContext(quizContext);
+  const token = localStorage.token;
   return (
     <div className="side-nav">
       <div className="side-logo">
@@ -12,7 +13,7 @@ const SideNav = () => {
       <div className="side-bar">
         {/* TODO: implement the logic to show the side titles if logged in */}
         {quizzes ? (
-          localStorage.token ? (
+          token ? (
             quizzes.map((quiz) => <></>)
           ) : (
             <p>Create an account first 👀</p>
