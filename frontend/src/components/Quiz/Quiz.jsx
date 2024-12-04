@@ -7,32 +7,21 @@ import CountDown from "../CountDown/CountDown";
 import Question from "../Question/Question";
 import Timer from "../Timer/Timer";
 import Button from "../Button/Button";
-import { Howl } from "howler"; // Import Howl for audio
 import "./style.css";
-import { toast } from "react-toastify";
-import CorrectAudio from "../../assets/audio/correct_answer.mp3";
-import WrongAudio from "../../assets/audio/wrong_answer.mp3";
-import FinishAudio from "../../assets/audio/succeeded_score.mp3";
+import { submitQuestion } from "../../functions/quizFunctions";
+
 const Quiz = () => {
   const { id } = useParams();
   const { questions, markQuizCompleted } = useContext(quizContext);
-  const { user, setUser } = useContext(userContext);
+  const { setUser } = useContext(userContext);
 
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [showCountdown, setShowCountdown] = useState(true);
-  const [quizStarted, setQuizStarted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false); // New state
 
   const navigate = useNavigate();
-
-  // Define sound effects
-  const sounds = {
-    correct: new Howl({ src: [CorrectAudio], volume: 0.8 }),
-    wrong: new Howl({ src: [WrongAudio], volume: 0.8 }),
-    completed: new Howl({ src: [FinishAudio], volume: 0.8 }),
-  };
 
   // Fetch quiz questions when quiz id changes
   useEffect(() => {
