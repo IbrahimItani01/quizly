@@ -15,6 +15,7 @@ const Panel = () => {
       <div className="motivation">
         <h1>We believe in you 🤟</h1>
         <p>BTW: There is a timer on quizzes ⏱️</p>
+        <em>Raise the volume 🔊, sound effects are present 👂</em>
       </div>
     </div>
   );
