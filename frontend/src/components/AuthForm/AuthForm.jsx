@@ -39,6 +39,22 @@ const AuthForm = ({ authType }) => {
         toast.error("You missed an input 🤭");
       }
     } else {
+      if (authForm.name && authForm.email && authForm.password) {
+        if (registerUser(authForm)) {
+          toast.success("Logged in 🎊");
+          localStorage.setItem("authenticated", "true");
+          setAuthForm({
+            name: "",
+            email: "",
+            password: "",
+          });
+        } else {
+          toast.error("Something went wrong ⛔");
+        }
+      } else {
+        toast.error("You missed an input 🤭");
+      }
+    }
   };
   const handleNavigate = (e)=>{
     e.target.textContent==="Login" && navigate("/login");
