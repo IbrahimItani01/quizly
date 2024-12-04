@@ -21,12 +21,16 @@ const AuthForm = ({ authType }) => {
     }));
   };
   const handleSubmit = () => {
-    authUser(authType, authForm) &&
+    if(authUser(authType, authForm)){
       setAuthForm({
         name: "",
         email: "",
         password: "",
       });
+      localStorage.setItem("token","test");
+      navigate("/panel")
+    }
+    
   };
   const handleNavigate = (e) => {
     e.target.textContent === "Login" && navigate("/login");
