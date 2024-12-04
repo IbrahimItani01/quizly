@@ -63,7 +63,10 @@ const Quiz = () => {
   };
 
   // Calculate progress
-  const progress = Math.round((currentQuestionIndex / quizQuestions.length) * 100);
+  const progress =
+    currentQuestionIndex >= quizQuestions.length - 1
+      ? 100
+      : Math.round((currentQuestionIndex / quizQuestions.length) * 100);
 
   return (
     <div className="quiz-container">
