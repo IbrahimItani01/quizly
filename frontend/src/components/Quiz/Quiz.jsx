@@ -82,6 +82,7 @@ const Quiz = () => {
             design={"outline"}
             text={"Answer"}
           />
+          <Timer handleSubmitAnswer={handleSubmitAnswer} />
         </div>
       ) : (
         <p>Loading quiz...</p>
