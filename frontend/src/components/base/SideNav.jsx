@@ -1,9 +1,18 @@
 import React, { useContext } from "react";
 import Logo from "../../logo.svg";
 import { quizContext } from "../../context/QuizContext";
+import { LogOut } from "lucide-react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const SideNav = () => {
   const { quizzes } = useContext(quizContext);
   const token = localStorage.token;
+  const navigate = useNavigate();
+  const handleLogout = ()=>{
+    localStorage.clear();
+    navigate("/")
+    toast.info("See Ya 👋")
+  }
   return (
     <div className="side-nav">
       <div className="side-logo">
