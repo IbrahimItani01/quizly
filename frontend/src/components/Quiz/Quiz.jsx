@@ -85,7 +85,7 @@ const Quiz = () => {
           <Timer handleSubmitAnswer={handleSubmitAnswer} />
         </div>
       ) : (
-        <p>Loading quiz...</p>
+        <p>Loading quiz 🥸</p>
       )}
     </div>
   );
