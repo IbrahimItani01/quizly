@@ -27,6 +27,9 @@ const Quiz = () => {
     setShowCountdown(false);
     setQuizStarted(true);
   };
+
+  // Handle submission of an answer
+  const handleSubmitAnswer = () => {
     const currentQuestion = quizQuestions[currentQuestionIndex];
 
     // Check if the answer is correct
@@ -59,6 +62,8 @@ const Quiz = () => {
     }));
   };
 
+  // Calculate progress
+  const progress = Math.round((currentQuestionIndex / quizQuestions.length) * 100);
 
   return (
     <div className="quiz-container">
