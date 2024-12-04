@@ -3,16 +3,19 @@ export const mockQuizzes = [
     id: 1,
     title: "General Knowledge",
     description: "Test your general knowledge with fun questions!",
+    completedBy: []
   },
   {
     id: 2,
     title: "Science Quiz",
     description: "Explore the wonders of science!",
+    completedBy: []
   },
   {
     id: 3,
     title: "History Trivia",
     description: "How well do you know your history?",
+    completedBy: []
   },
 ];
 export const mockQuestions = {
