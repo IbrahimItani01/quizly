@@ -37,6 +37,33 @@ const AuthForm = ({ authType }) => {
               onChange={handleChange}
             />
           </>
+        ) : (
+          <>
+            <InputField
+              name={"name"}
+              label={"Name"}
+              type={"text"}
+              placeholder={"enter your name"}
+              value={authForm.name}
+              onChange={handleChange}
+            />
+            <InputField
+              name={"email"}
+              label={"Email"}
+              type={"email"}
+              placeholder={"enter your email"}
+              value={authForm.email}
+              onChange={handleChange}
+            />
+            <InputField
+              name={"password"}
+              label={"Password"}
+              type={"password"}
+              placeholder={"enter your password"}
+              value={authForm.password}
+              onChange={handleChange}
+            />
+          </>
         )}
       </div>
     </div>
