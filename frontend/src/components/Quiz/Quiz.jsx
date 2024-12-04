@@ -27,6 +27,19 @@ const Quiz = () => {
     setShowCountdown(false);
     setQuizStarted(true);
   };
+    const currentQuestion = quizQuestions[currentQuestionIndex];
+
+    // Check if the answer is correct
+    if (
+      (currentQuestion.type === "multiple-choice" &&
+        userAnswer === currentQuestion.correctAnswer) ||
+      (currentQuestion.type === "user-input" &&
+        userAnswer.trim().toLowerCase() ===
+          currentQuestion.correctAnswer.trim().toLowerCase())
+    ) {
+      updateScore();
+    }
+
 
   return (
     <div className="quiz-container">
