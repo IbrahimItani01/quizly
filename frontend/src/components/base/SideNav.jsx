@@ -23,7 +23,11 @@ const SideNav = () => {
         )}
       </div>
       <div className="footer">
-        <em>Developed by Ibrahim Itani</em>
+        {token?(
+          <LogOut className="logout-icon" onClick={handleLogout}/>
+        ):(
+          <em>Developed by Ibrahim Itani</em>
+        )}
       </div>
     </div>
   );
