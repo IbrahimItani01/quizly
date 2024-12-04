@@ -9,6 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 const AuthForm = ({ authType }) => {
     const navigate = useNavigate();
+  const [authForm, setAuthForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 AuthForm.propTypes = {
   status: PropTypes.oneOf(["login", "register"]).isRequired,
 };
