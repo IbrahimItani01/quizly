@@ -81,6 +81,7 @@ const Quiz = () => {
       setCurrentQuestionIndex((prev) => prev + 1);
       setUserAnswer(""); // Reset the input field
     } else {
+      setQuizCompleted(true); // Mark the quiz as completed
       markQuizCompleted(parseInt(id));
       alert("Quiz Complete!");
       navigate("/complete"); // Optionally, navigate to a results or summary page
