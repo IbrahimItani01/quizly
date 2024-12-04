@@ -21,6 +21,13 @@ const Quiz = () => {
   useEffect(() => {
     setQuizQuestions(questions[parseInt(id)]);
   }, [questions, id]);
+
+  // Countdown logic before showing the quiz
+  const handleCountdownComplete = () => {
+    setShowCountdown(false);
+    setQuizStarted(true);
+  };
+
   return (
     <div className="quiz-container">
       {showCountdown ? (
