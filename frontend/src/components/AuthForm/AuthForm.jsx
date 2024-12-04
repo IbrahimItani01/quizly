@@ -66,6 +66,11 @@ const AuthForm = ({ authType }) => {
           </>
         )}
       </div>
+      <Button
+        text={authType === "login" ? "login" : "register"}
+        design={"action"}
+        onClick={handleSubmit}
+      />
     </div>
   );
 };
