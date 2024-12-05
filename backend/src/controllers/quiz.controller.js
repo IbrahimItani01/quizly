@@ -25,3 +25,22 @@ export const getQuizById = async (req, res) => {
   }
 };
 
+export const createQuiz = async (req, res) => {
+  const { title, description, questions } = req.body;
+
+  try {
+    const newQuiz = new Quiz({
+      title,
+      description,
+      questions,
+    });
+
+    await newQuiz.save();
+    res.status(201).json(newQuiz);
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Error creating quiz", error: error.message });
+  }
+};
+
