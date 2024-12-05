@@ -44,3 +44,19 @@ export const createQuiz = async (req, res) => {
   }
 };
 
+export const updateQuiz = async (req, res) => {
+  try {
+    const updatedQuiz = await Quiz.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updatedQuiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+    res.status(200).json(updatedQuiz);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating quiz", error: error.message });
+  }
+};
+
