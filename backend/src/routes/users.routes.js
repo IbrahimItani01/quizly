@@ -12,11 +12,8 @@ const router = express.Router();
 router.get("/", getAllUsers);
 
 router.get("/:id", getUserById);
-
-router.post("/", createUser);
-
-router.put("/:id", updateUser);
-
+router.put("/:id/score",authenticateJWT, updateUserScore);
+router.put("/:id/complete", authenticateJWT,markQuizCompleted);
 router.delete("/:id", deleteUser);
 
 export default router;
