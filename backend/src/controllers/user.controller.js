@@ -39,3 +39,23 @@ export const createUser = async (req, res) => {
   }
 };
 
+export const updateUserScore = async (req, res) => {
+  const { id } = req.params;
+  const { score } = req.body;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { score },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating user score", error: error.message });
+  }
+};
+
