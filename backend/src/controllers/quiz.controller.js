@@ -60,3 +60,16 @@ export const updateQuiz = async (req, res) => {
   }
 };
 
+export const deleteQuiz = async (req, res) => {
+  try {
+    const deletedQuiz = await Quiz.findByIdAndDelete(req.params.id);
+    if (!deletedQuiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+    res.status(200).json({ message: "Quiz deleted successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error deleting quiz", error: error.message });
+  }
+};
