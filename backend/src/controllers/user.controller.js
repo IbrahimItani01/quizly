@@ -59,3 +59,27 @@ export const updateUserScore = async (req, res) => {
   }
 };
 
+export const markQuizCompleted = async (req, res) => {
+  const { userId, quizId } = req.body;
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (!user.completedQuizzes.includes(quizId)) {
+      user.completedQuizzes.push(quizId);
+    }
+
+    await user.save();
+    res.status(200).json(user);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Error marking quiz as completed",
+        error: error.message,
+      });
+  }
+};
+
