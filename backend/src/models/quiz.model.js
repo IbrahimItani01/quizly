@@ -10,3 +10,15 @@ const questionSchema = new Schema({
   options: { type: [String], required: function () { return this.type === "multiple-choice"; } },
   correctAnswer: { type: String, required: true },
 });
+
+
+const quizSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  questions: { type: [questionSchema], required: true }, 
+  completedBy: { type: [mongoose.Types.ObjectId], ref: "User" }, 
+}, {
+  timestamps: true, 
+});
+
+
