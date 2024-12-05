@@ -16,3 +16,7 @@ mongoose
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((error) => console.error("❌ MongoDB connection failed:", error));
 
+app.use("/api/users", userRoutes);
+app.use("/api/quizzes", quizRoutes);
+
+
