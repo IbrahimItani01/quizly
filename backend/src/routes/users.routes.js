@@ -2,10 +2,13 @@ import express from "express";
 import {
   getAllUsers,
   getUserById,
-  createUser,
-  updateUser,
+  registerUser,
+  loginUser,
+  updateUserScore,
+  markQuizCompleted,
   deleteUser,
 } from "../controllers/user.controller.js";
+import authenticateJWT from "../middlewares/jwt.middleware.js";
 
 const router = express.Router();
 
