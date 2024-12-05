@@ -22,3 +22,5 @@ const quizSchema = new Schema({
 });
 
 
+const Quiz = model("Quiz", quizSchema);
+
