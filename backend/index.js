@@ -20,3 +20,6 @@ app.use("/api/users", userRoutes);
 app.use("/api/quizzes", quizRoutes);
 
 
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
