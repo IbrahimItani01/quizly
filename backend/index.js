@@ -6,3 +6,4 @@ import quizRoutes from "./src/routes/quizzes.routes.js";
 
 dotenv.config();
 
+const app = express();
