@@ -26,3 +26,16 @@ export const getUserById = async (req, res) => {
   }
 };
 
+export const createUser = async (req, res) => {
+  const { name, email, password, score } = req.body;
+  try {
+    const newUser = new User({ name, email, password, score });
+    await newUser.save();
+    res.status(201).json(newUser);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error creating user", error: error.message });
+  }
+};
+
