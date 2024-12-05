@@ -6,17 +6,18 @@ import {
   updateQuiz,
   deleteQuiz,
 } from "../controllers/quiz.controller.js";
+import authenticateJWT from "../middlewares/jwt.middleware.js";
 
 const router = express.Router();
 
-router.get("/", getAllQuizzes);
+router.get("/",authenticateJWT, getAllQuizzes);
 
-router.get("/:id", getQuizById);
+router.get("/:id",authenticateJWT, getQuizById);
 
-router.post("/", createQuiz);
+router.post("/",authenticateJWT, createQuiz);
 
-router.put("/:id", updateQuiz);
+router.put("/:id",authenticateJWT, updateQuiz);
 
-router.delete("/:id", deleteQuiz);
+router.delete("/:id",authenticateJWT, deleteQuiz);
 
 export default router;
