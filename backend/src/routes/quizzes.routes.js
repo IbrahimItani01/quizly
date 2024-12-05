@@ -19,3 +19,4 @@ router.put("/:id", updateQuiz);
 
 router.delete("/:id", deleteQuiz);
 
+export default router;
