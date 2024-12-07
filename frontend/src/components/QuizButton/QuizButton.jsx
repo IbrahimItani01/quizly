@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const QuizButton = ({ data, completed }) => {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate(`/quiz/${data.id}`);
+    navigate(`/quiz/${data._id}`);
   };
 useEffect(()=>{
   console.log(completed);
