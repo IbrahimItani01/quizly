@@ -22,4 +22,11 @@ const UserProvider = ({ children, userId }) => {
     }
   }, []);
 
-export default UserProvider
+  const updateScore = async (score) => {
+    try {
+      await updateUserScore(score);
+    } catch (error) {
+      console.error("Error updating score:", error);
+      throw error;
+    }
+  };
