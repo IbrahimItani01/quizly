@@ -23,6 +23,16 @@ export const QuizProvider = ({ children }) => {
     fetchQuizzes();
   }, []);
 
+  const markQuizCompleted = async (quizId) => {
+    const token = localStorage.token;
+    try {
+      await completeQuiz(quizId, token); // Call API to mark quiz as completed
+      setCompletedQuizzes((prev) => [...new Set([...prev, quizId])]);
+    } catch (error) {
+      console.error("Error marking quiz as completed:", error);
+    }
+  };
+
   return (
     <quizContext.Provider value={{ quizzes, completedQuizzes, markQuizCompleted ,questions}}>
       {children}
