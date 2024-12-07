@@ -34,7 +34,6 @@ export const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use" });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
@@ -77,7 +76,6 @@ export const loginUser = async (req, res) => {
     res.status(500).json({ message: "Error logging in", error: error.message });
   }
 };
-
 export const updateUserScore = async (req, res) => {
   const { score } = req.body; // Increment value
 
@@ -112,17 +110,22 @@ export const markQuizCompleted = async (req, res) => {
   const { quizId } = req.body; // Only quizId is required in the request body
 
   try {
+    // Fetch userId from the token via the middleware
+    const userId = req.user.id;
+
     const user = await User.findById(userId);
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // Add quizId to completedQuizzes if not already present
     if (!user.completedQuizzes.includes(quizId)) {
       user.completedQuizzes.push(quizId);
+      await user.save();
     }
 
-    await user.save();
-    res.status(200).json(user);
+    res.status(200).json(user); // Return updated user data
   } catch (error) {
     res.status(500).json({
       message: "Error marking quiz as completed",
@@ -130,6 +133,7 @@ export const markQuizCompleted = async (req, res) => {
     });
   }
 };
+
 
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
