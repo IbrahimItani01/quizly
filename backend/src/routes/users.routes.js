@@ -16,7 +16,7 @@ router.get("/",getAllUsers);
 router.get("/me", authenticateJWT, getUserById);
 router.post("/register", registerUser); 
 router.post("/login", loginUser); 
-router.put("/:id/score",authenticateJWT, updateUserScore);
+router.put("/score", authenticateJWT, updateUserScore);
 router.put("/:id/complete", authenticateJWT,markQuizCompleted);
 router.delete("/:id", deleteUser);
 
