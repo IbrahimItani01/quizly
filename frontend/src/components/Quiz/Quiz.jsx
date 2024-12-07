@@ -11,24 +11,31 @@ import "./style.css";
 import { submitQuestion } from "../../functions/quizFunctions";
 
 const Quiz = () => {
-  const { id } = useParams();
-  const { questions, markQuizCompleted } = useContext(quizContext);
-  const { setUser } = useContext(userContext);
+  const { id } = useParams(); // Quiz ID
+  const { quizzes, markQuizCompleted } = useContext(quizContext);
+  const { setUser,updateScore } = useContext(userContext);
 
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [showCountdown, setShowCountdown] = useState(true);
-  const [quizCompleted, setQuizCompleted] = useState(false); // New state
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   const navigate = useNavigate();
 
-  // Fetch quiz questions when quiz id changes
-  useEffect(() => {
-    setQuizQuestions(questions[parseInt(id)]);
-  }, [questions, id]);
 
-  // Countdown logic before showing the quiz
+  useEffect(() => {
+    if (quizzes && quizzes.length > 0) {
+      const currentQuiz = quizzes.find((quiz) => quiz._id ===id);
+      if (currentQuiz) {
+        setQuizQuestions(currentQuiz.questions || []);
+      } else {
+        console.error("Quiz not found!");
+        setQuizQuestions([]);
+      }
+    }
+  }, [quizzes, id]);
+
   const handleCountdownComplete = () => {
     setShowCountdown(false);
   };
