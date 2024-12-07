@@ -25,56 +25,67 @@ export const submitQuestion = async (
   id,
   updateScore // Backend score updater
 ) => {
-  if (quizCompleted) return; // Prevent further actions if quiz is completed
+  if (quizCompleted) return; 
 
   const currentQuestion = quizQuestions[currentQuestionIndex];
 
-  // Check if an answer is provided
   if (
-    (currentQuestion.type === "multiple-choice" && !userAnswer) || // No option selected for multiple-choice
-    (currentQuestion.type === "user-input" && userAnswer.trim() === "") // Input field is empty
+    (currentQuestion.type === "multiple-choice" && !userAnswer) ||
+    (currentQuestion.type === "user-input" && userAnswer.trim() === "")
   ) {
-    toast.info("You shall answer 🧙‍♂️");
+    toast.info("Please answer the question 🧙‍♂️");
     return;
   }
 
-  // Check if the answer is correct
-  if (
-    (currentQuestion.type === "multiple-choice" &&
-      userAnswer === currentQuestion.correctAnswer) ||
-    (currentQuestion.type === "user-input" &&
-      userAnswer.trim().toLowerCase() ===
-        currentQuestion.correctAnswer.trim().toLowerCase())
-  ) {
-    toast.success("Bravo! 🥳 You nailed it! 🎯");
+  // Determine if the answer is correct
+  const isCorrect =
+    currentQuestion.type === "multiple-choice"
+      ? userAnswer === currentQuestion.correctAnswer
+      : userAnswer.trim().toLowerCase() ===
+        currentQuestion.correctAnswer.trim().toLowerCase();
+
+  if (isCorrect) {
+    toast.success("Correct! 🎯");
     sounds.correct.play();
-    updateScore(setUser);
+
+    // Update score in the backend
+    try {
+      const incrementValue = 10; // Define points for a correct answer
+      await updateScore(incrementValue)
+    } catch (error) {
+      console.error("Failed to update score in backend:", error);
+    }
+
+    // Update score in the UI
+    setUser((prevUser) => ({
+      ...prevUser,
+      score: (prevUser.score || 0) + 10,
+    }));
   } else {
-    toast.error("Ooops Wrong Answer 😔");
-    sounds.wrong.play(); // Play wrong answer sound
+    toast.error("Wrong answer! 😔");
+    sounds.wrong.play();
   }
 
   // Move to the next question or finish the quiz
   if (currentQuestionIndex < quizQuestions.length - 1) {
     setCurrentQuestionIndex((prev) => prev + 1);
-    setUserAnswer(""); // Reset the input field
+    setUserAnswer(""); // Clear the answer field
   } else {
-    setQuizCompleted(true); // Mark the quiz as completed
-    markQuizCompleted(parseInt(id));
-    toast.success("Quiz Complete 🥳");
-    sounds.completed.play(); // Play quiz completion sound
+    setQuizCompleted(true);
+    markQuizCompleted(id);
+    toast.success("Quiz completed! 🥳");
+    sounds.completed.play();
+
+    // Update completed quizzes in the user object
     setUser((prevUser) => ({
       ...prevUser,
       completedQuizzes: [...(prevUser.completedQuizzes || []), parseInt(id)],
     }));
-    setTimeout(() => {
-      navigate("/panel");
-    }, 3000);
+
+    // Redirect to panel after completion
+    setTimeout(() => navigate("/panel"), 3000);
   }
 };
-const updateScore = (setUser) => {
-  setUser((prevUser) => ({
-    ...prevUser,
-    score: prevUser.score + 10, // Add 10 points per correct answer
-  }));
-};
+
+
+
