@@ -10,7 +10,7 @@ import authenticateJWT from "../middlewares/jwt.middleware.js";
 
 const router = express.Router();
 
-router.get("/",authenticateJWT, getAllQuizzes);
+router.get("/", getAllQuizzes);
 
 router.get("/:id",authenticateJWT, getQuizById);
 
