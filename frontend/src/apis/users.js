@@ -29,3 +29,16 @@ export const loginUser = async (data) => {
   }
 };
 
+export const getUserData = async (token) => {
+  try {
+    const response = await axios.get(`${baseUrl}/me`, {
+      headers: { Authorization: `Bearer ${token}` }, // Pass token in the header
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    throw error;
+  }
+};
+
+
