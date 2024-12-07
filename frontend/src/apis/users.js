@@ -42,3 +42,22 @@ export const getUserData = async (token) => {
 };
 
 
+export const updateUserScore = async (score) => {
+  const token = localStorage.token;
+  try {
+    const response = await axios.put(
+      `${baseUrl}/score`,
+      { score },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating user score:", error);
+    throw error;
+  }
+};
+
