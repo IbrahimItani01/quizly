@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import QuizButton from "../QuizButton/QuizButton";
 
 const SideNav = () => {
-  const { quizzes } = useContext(quizContext); // Fetch quizzes from quizContext
+  const { quizzes,completedQuizzes } = useContext(quizContext); // Fetch quizzes from quizContext
   const { user } = useContext(userContext); // Fetch user from userContext
   const token = localStorage.token;
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const SideNav = () => {
           token ? (
             quizzes.map((quiz) => (
               <QuizButton
-                key={quiz.id}
+                key={quiz._id}
                 data={quiz}
                 completed={user?.completedQuizzes?.includes(quiz.id)} // Check completion via userContext
               />
