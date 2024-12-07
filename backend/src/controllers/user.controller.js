@@ -79,15 +79,16 @@ export const loginUser = async (req, res) => {
 };
 
 export const updateUserScore = async (req, res) => {
-  const { id } = req.params;
-  const { score } = req.body;
+  const { score } = req.body; // Increment value
+
   try {
-    const updatedUser = await User.findByIdAndUpdate(
-      id,
-      { score },
-      { new: true }
-    );
-    if (!updatedUser) {
+    // Fetch the current user from the token
+    const userId = req.user.id;
+
+    // Fetch the user to get the current score
+    const user = await User.findById(userId);
+
+    if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(updatedUser);
