@@ -61,3 +61,21 @@ export const updateUserScore = async (score) => {
   }
 };
 
+export const completeQuiz = async (quizId, token) => {
+  try {
+    const response = await axios.put(
+      `${baseUrl}/${quizId}/complete`,
+      { quizId }, // Send quizId in the body
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Attach token
+        },
+      }
+    );
+    console.log("done quiz")
+    return response.data;
+  } catch (error) {
+    console.error("Error completing quiz:", error);
+    throw error;
+  }
+};
