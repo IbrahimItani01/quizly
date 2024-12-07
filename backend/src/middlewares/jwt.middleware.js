@@ -8,7 +8,7 @@ export const authenticateJWT = (req, res, next) => {
   const token = authHeader && authHeader.split(" ")[1]; // Extract token from Bearer <token>
 
   if (!token) {
-    return res.status(401).json({ message: "Access Denied: No Token Provided" });
+    return res.status(401).json({ message: "No token provided" });
   }
 
   jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
