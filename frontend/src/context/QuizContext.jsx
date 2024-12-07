@@ -34,7 +34,13 @@ export const QuizProvider = ({ children }) => {
   };
 
   return (
-    <quizContext.Provider value={{ quizzes, completedQuizzes, markQuizCompleted ,questions}}>
+    <quizContext.Provider
+      value={{
+        quizzes,
+        markQuizCompleted,
+        completedQuizzes,
+      }}
+    >
       {children}
     </quizContext.Provider>
   );
