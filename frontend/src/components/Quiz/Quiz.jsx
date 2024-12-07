@@ -52,7 +52,8 @@ const Quiz = () => {
       setQuizCompleted,
       markQuizCompleted,
       navigate,
-      id
+      id,
+      updateScore 
     );
   };
 
@@ -78,18 +79,24 @@ const Quiz = () => {
             className="progress-bar"
             barContainerClassName="progress-container"
           />
-          <Question
-            quizQuestions={quizQuestions}
-            currentQuestionIndex={currentQuestionIndex}
-            setUserAnswer={setUserAnswer}
-            userAnswer={userAnswer}
-          />
-          <Button
-            onClick={handleSubmitAnswer}
-            design={"outline"}
-            text={"Answer"}
-          />
-          <Timer handleSubmitAnswer={handleSubmitAnswer} />
+          {!quizCompleted ? (
+            <>
+              <Question
+                quizQuestions={quizQuestions}
+                currentQuestionIndex={currentQuestionIndex}
+                setUserAnswer={setUserAnswer}
+                userAnswer={userAnswer}
+              />
+              <Button
+                onClick={handleSubmitAnswer}
+                design="outline"
+                text="Answer"
+              />
+              <Timer handleSubmitAnswer={handleSubmitAnswer} />
+            </>
+          ) : (
+            <p>Quiz completed! Redirecting to panel... 🎉</p>
+          )}
         </div>
       ) : (
         <p>Loading quiz 🥸</p>
