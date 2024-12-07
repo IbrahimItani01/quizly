@@ -30,3 +30,14 @@ const UserProvider = ({ children, userId }) => {
       throw error;
     }
   };
+
+  const completeQuiz = async (id, quizId) => {
+    try {
+      const updatedUser = await completeQuiz(id, quizId);
+      setUser(updatedUser);
+    } catch (error) {
+      console.error("Error marking quiz as completed:", error);
+      throw error;
+    }
+  };
+
