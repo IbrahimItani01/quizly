@@ -107,8 +107,10 @@ export const updateUserScore = async (req, res) => {
   }
 };
 
+
 export const markQuizCompleted = async (req, res) => {
-  const { userId, quizId } = req.body;
+  const { quizId } = req.body; // Only quizId is required in the request body
+
   try {
     const user = await User.findById(userId);
     if (!user) {
