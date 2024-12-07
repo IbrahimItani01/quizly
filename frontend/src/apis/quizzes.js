@@ -13,3 +13,15 @@ export const getAllQuizzes = async (token) => {
     throw error;
   }
 };
+
+export const getQuizById = async (id, token) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching quiz by ID:", error);
+    throw error;
+  }
+};
