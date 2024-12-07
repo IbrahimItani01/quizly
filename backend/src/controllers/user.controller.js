@@ -91,7 +91,15 @@ export const updateUserScore = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json(updatedUser);
+
+    // Calculate the new score
+    const newScore = (user.score || 0) + score;
+
+    // Update the user's score in the database
+    user.score = newScore;
+    await user.save();
+
+    res.status(200).json(user); // Return the updated user object
   } catch (error) {
     res
       .status(500)
