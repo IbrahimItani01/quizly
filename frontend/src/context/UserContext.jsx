@@ -41,3 +41,19 @@ const UserProvider = ({ children, userId }) => {
     }
   };
 
+  return (
+    <userContext.Provider
+      value={{
+        user,
+        setUser,
+        isAuthenticated,
+        updateScore,
+        completeQuiz,
+      }}
+    >
+      {children}
+    </userContext.Provider>
+  );
+};
+
+export default UserProvider;
