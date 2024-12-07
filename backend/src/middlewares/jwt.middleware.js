@@ -11,14 +11,12 @@ export const authenticateJWT = (req, res, next) => {
     return res.status(401).json({ message: "No token provided" });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: "Invalid Token" });
-    }
-
-    req.user = user; 
-    next(); 
-  });
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY); // Decode the token
+    req.user = decoded; // Attach decoded data to request
+    next();
+  } catch (error) {
+    return res.status(403).json({ message: "Invalid token" });
+  }
 };
-
-export default authenticateJWT;  
+export default authenticateJWT;
