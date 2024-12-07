@@ -19,3 +19,13 @@ export const registerUser = async (data) => {
   }
 };
 
+export const loginUser = async (data) => {
+  try {
+    const response = await axios.post(`${baseUrl}/login`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    throw error;
+  }
+};
+
