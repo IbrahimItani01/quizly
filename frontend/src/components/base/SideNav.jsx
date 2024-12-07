@@ -12,7 +12,6 @@ const SideNav = () => {
   const { user } = useContext(userContext); // Fetch user from userContext
   const token = localStorage.token;
   const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
@@ -32,8 +31,14 @@ const SideNav = () => {
               <QuizButton
                 key={quiz._id}
                 data={quiz}
-                completed={user?.completedQuizzes?.includes(quiz.id)} // Check completion via userContext
-              />
+                completed={
+                  user?.completedQuizzes?.some(
+                    (completedQuiz) => completedQuiz._id === quiz._id
+                  ) ||
+                  completedQuizzes?.some(
+                    (completedQuiz) => completedQuiz._id === quiz._id
+                  )
+                }                />
             ))
           ) : (
             <p>Create an account first 👀</p>
