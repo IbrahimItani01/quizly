@@ -14,19 +14,18 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const getUserById = async (req, res) => {
-  const { id } = req.params;
+  const userId = req.user.id; // Extract user ID from the decoded token
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching user", error: error.message });
+    res.status(500).json({ message: "Error fetching user", error: error.message });
   }
 };
+
 
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
