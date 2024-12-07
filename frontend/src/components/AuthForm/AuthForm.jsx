@@ -5,6 +5,7 @@ import InputField from "../InputField/InputField";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { authUser } from "../../functions/authUser";
+import { toast } from "react-toastify";
 
 const AuthForm = ({ authType }) => {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ const AuthForm = ({ authType }) => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false); // Add a loading state
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAuthForm((prev) => ({
@@ -20,22 +23,36 @@ const AuthForm = ({ authType }) => {
       [name]: value,
     }));
   };
-  const handleSubmit = () => {
-    if(authUser(authType, authForm)){
-      setAuthForm({
-        name: "",
-        email: "",
-        password: "",
-      });
-      localStorage.setItem("token","test");
-      navigate("/panel")
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true); // Set loading to true
+      const user = await authUser(authType, authForm); // Call authentication
+      setLoading(false); // Set loading to false
+      console.log(user)
+  
+      if (user) {
+        setAuthForm({
+          name: "",
+          email: "",
+          password: "",
+        });
+        navigate("/panel"); // Navigate to the dashboard
+      }
+    } catch (error) {
+      setLoading(false); // Ensure loading stops in case of an error
+      console.error("Error during registration:", error);
+      toast.error("Something went wrong ⛔");
     }
-    
   };
+  
+
   const handleNavigate = (e) => {
-    e.target.textContent === "Login" && navigate("/login");
-    e.target.textContent === "Register" && navigate("/register");
+    const text = e.target.textContent;
+    if (text === "Login") navigate("/login");
+    if (text === "Register") navigate("/register");
   };
+
   return (
     <div className="auth-form">
       <h2>{authType === "login" ? "Login" : "Create an Account"}</h2>
@@ -43,18 +60,18 @@ const AuthForm = ({ authType }) => {
         {authType === "login" ? (
           <>
             <InputField
-              name={"email"}
-              label={"Email"}
-              type={"email"}
-              placeholder={"enter your email"}
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
               value={authForm.email}
               onChange={handleChange}
             />
             <InputField
-              name={"password"}
-              label={"Password"}
-              type={"password"}
-              placeholder={"enter your password"}
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
               value={authForm.password}
               onChange={handleChange}
             />
@@ -62,26 +79,26 @@ const AuthForm = ({ authType }) => {
         ) : (
           <>
             <InputField
-              name={"name"}
-              label={"Name"}
-              type={"text"}
-              placeholder={"enter your name"}
+              name="name"
+              label="Name"
+              type="text"
+              placeholder="Enter your name"
               value={authForm.name}
               onChange={handleChange}
             />
             <InputField
-              name={"email"}
-              label={"Email"}
-              type={"email"}
-              placeholder={"enter your email"}
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="Enter your email"
               value={authForm.email}
               onChange={handleChange}
             />
             <InputField
-              name={"password"}
-              label={"Password"}
-              type={"password"}
-              placeholder={"enter your password"}
+              name="password"
+              label="Password"
+              type="password"
+              placeholder="Enter your password"
               value={authForm.password}
               onChange={handleChange}
             />
@@ -89,9 +106,10 @@ const AuthForm = ({ authType }) => {
         )}
       </div>
       <Button
-        text={authType === "login" ? "login" : "register"}
-        design={"action"}
+        text={authType === "login" ? "Login" : "Register"}
+        design="action"
         onClick={handleSubmit}
+        disabled={loading} // Disable button while loading
       />
       {authType === "login" ? (
         <em>
@@ -105,7 +123,9 @@ const AuthForm = ({ authType }) => {
     </div>
   );
 };
+
 AuthForm.propTypes = {
-  status: PropTypes.oneOf(["login", "register"]).isRequired,
+  authType: PropTypes.oneOf(["login", "register"]).isRequired,
 };
+
 export default AuthForm;
